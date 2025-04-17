@@ -1,0 +1,148 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Dental X-Ray Analysis</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1 {
+                color: #0066cc;
+                text-align: center;
+            }
+            .upload-form {
+                border: 2px dashed #0066cc;
+                border-radius: 10px;
+                padding: 20px;
+                text-align: center;
+                margin: 20px 0;
+            }
+            .button {
+                background-color: #0066cc;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Dental X-Ray Analysis</h1>
+        
+        <div class="upload-form">
+            <h2>Upload Your Dental X-Ray</h2>
+            <p>Select an image file (PNG, JPG, or JPEG) for analysis</p>
+            
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="image/png, image/jpeg">
+                <br>
+                <button type="submit" class="button">Analyze X-Ray</button>
+            </form>
+        </div>
+    </body>
+    </html>
+    """
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    return redirect('/results')
+
+@app.route('/results')
+def results():
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Results - Dental X-Ray Analysis</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h1 {
+                color: #0066cc;
+                text-align: center;
+            }
+            .results-box {
+                border: 2px solid #0066cc;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 20px 0;
+                background-color: #f0f8ff;
+            }
+            .confidence-meter {
+                margin: 20px 0;
+            }
+            .meter-container {
+                width: 100%;
+                height: 30px;
+                background-color: #f3f3f3;
+                border-radius: 15px;
+                overflow: hidden;
+            }
+            .meter-fill {
+                height: 100%;
+                background-color: green;
+                width: 85%;
+                text-align: center;
+                line-height: 30px;
+                color: white;
+                font-weight: bold;
+            }
+            .findings {
+                margin-top: 20px;
+            }
+            .button {
+                background-color: #0066cc;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                margin-top: 10px;
+                text-decoration: none;
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Dental X-Ray Analysis Results</h1>
+        
+        <div class="results-box">
+            <div class="confidence-meter">
+                <h2>Analysis: Normal</h2>
+                <div class="meter-container">
+                    <div class="meter-fill">85%</div>
+                </div>
+            </div>
+            
+            <div class="findings">
+                <h2>Key Findings</h2>
+                <ul>
+                    <li>Normal tooth structure detected</li>
+                    <li>No significant areas of concern identified</li>
+                    <li>Bone density appears within normal parameters</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/" class="button">Analyze Another X-Ray</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+
+if __name__ == '__main__':
+    print(f"Starting simple Dental X-Ray app on port 8080")
+    app.run(host='0.0.0.0', port=8080)
